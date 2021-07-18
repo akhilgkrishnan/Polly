@@ -1,16 +1,12 @@
 import React from "react";
 import TableRow from "./TableRow";
-import PropTypes from "prop-types";
 
-const Table = ({ data }) => {
+const Table = () => {
   return (
     <div className="table w-full">
-      <TableRow data={data} />
+      <TableRow />
     </div>
   );
 };
 
-TableRow.propTypes = {
-  data: PropTypes.array.isRequired,
-};
 export default Table;

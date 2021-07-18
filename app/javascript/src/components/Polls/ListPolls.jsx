@@ -1,8 +1,8 @@
 import React from "react";
 import Table from "components/Table";
 
-const ListPolls = ({ data }) => {
-  return <Table data={data} />;
+const ListPolls = () => {
+  return <Table />;
 };
 
 export default ListPolls;

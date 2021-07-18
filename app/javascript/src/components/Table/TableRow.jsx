@@ -1,7 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useContext } from "react";
+import { PollsDataContext } from "components/Dashboard";
 
-const TableRow = ({ data }) => {
+const TableRow = () => {
+  const data = useContext(PollsDataContext);
   return (
     <div className="table w-full">
       <div className="table-row-group">
@@ -16,9 +17,4 @@ const TableRow = ({ data }) => {
     </div>
   );
 };
-
-TableRow.propTypes = {
-  data: PropTypes.array.isRequired,
-};
-
 export default TableRow;

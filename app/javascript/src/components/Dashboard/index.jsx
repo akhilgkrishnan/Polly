@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { isNil, isEmpty, either } from "ramda";
 
 import Container from "components/Container";
@@ -6,6 +6,8 @@ import ListPolls from "components/Polls/ListPolls";
 import PageLoader from "components/PageLoader";
 import Button from "components/Button";
 import pollsApi from "apis/polls";
+
+export const PollsDataContext = createContext();
 
 const Dashboard = ({ history }) => {
   const [polls, setPolls] = useState([]);
@@ -49,7 +51,9 @@ const Dashboard = ({ history }) => {
                 loading={loading}
               />
             </div>
-            <ListPolls data={polls} />
+            <PollsDataContext.Provider value={polls}>
+              <ListPolls />
+            </PollsDataContext.Provider>
           </div>
         </div>
       </Container>
