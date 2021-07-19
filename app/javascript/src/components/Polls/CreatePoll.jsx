@@ -7,9 +7,12 @@ const OPTIONS_COUNT = 4;
 const CreatePoll = ({ history }) => {
   const [title, setTitle] = useState("");
   // Add four options to the options list
-  const [options, setOptions] = useState(
-    Array(OPTIONS_COUNT).fill({ value: "" }).flat()
-  );
+  const [options, setOptions] = useState([
+    { value: "" },
+    { value: "" },
+    { value: "" },
+    { value: "" },
+  ]);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async event => {
