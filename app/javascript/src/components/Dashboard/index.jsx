@@ -24,6 +24,10 @@ const Dashboard = ({ history }) => {
     }
   };
 
+  const showPoll = id => {
+    history.push(`/polls/${id}/show`);
+  };
+
   useEffect(() => {
     fetchPolls();
   }, []);
@@ -52,7 +56,7 @@ const Dashboard = ({ history }) => {
               />
             </div>
             <PollsDataContext.Provider value={polls}>
-              <ListPolls />
+              <ListPolls showPoll={showPoll} />
             </PollsDataContext.Provider>
           </div>
         </div>
