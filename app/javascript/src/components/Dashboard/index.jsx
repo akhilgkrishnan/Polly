@@ -46,7 +46,7 @@ const Dashboard = ({ history }) => {
               <Button
                 type="link"
                 path={`/polls/new`}
-                buttonText="Create a poll"
+                buttonText="Create a poll +"
                 iconClass="ri-add-line"
                 loading={loading}
               />
