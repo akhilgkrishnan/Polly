@@ -5,12 +5,14 @@ import Button from "components/Button";
 import Container from "components/Container";
 import PageLoader from "components/PageLoader";
 import pollsApi from "apis/polls";
+import Toastr from "components/Common/Toastr";
 
 const ShowPoll = () => {
   const { id } = useParams();
   const [pollDetails, setPollDetails] = useState("");
   const [pageLoading, setPageLoading] = useState(true);
   const [selectedOption, setSelectedOption] = useState("");
+  const [showResult, setshowResult] = useState(false);
 
   const fetchPollDetails = async () => {
     try {
@@ -21,6 +23,44 @@ const ShowPoll = () => {
     } finally {
       setPageLoading(false);
     }
+  };
+
+  const handleSubmit = async () => {
+    if (selectedOption == "") {
+      Toastr.error("Answer can't be blank.");
+      return;
+    }
+    setPollDetails(state => {
+      state.options.map(obj => {
+        if (obj.id == selectedOption) obj.vote_count = ++obj["vote_count"];
+      });
+      return state;
+    });
+
+    await pollsApi.update({
+      id,
+      payload: {
+        poll: {
+          title: pollDetails.title,
+          options_attributes: pollDetails.options,
+        },
+      },
+    });
+    setshowResult(true);
+  };
+
+  const optionVotePercentage = id => {
+    let percentage;
+    const total_vote = pollDetails.options.reduce(
+      (sum, current) => sum + current.vote_count,
+      0
+    );
+    pollDetails.options.map(obj => {
+      if (obj.id == id) {
+        percentage = (obj.vote_count / total_vote) * 100;
+      }
+    });
+    return percentage.toFixed(2);
   };
 
   useEffect(() => {
@@ -54,12 +94,34 @@ const ShowPoll = () => {
                     {option.value}
                   </div>
                 </div>
+                {showResult ? (
+                  <div className="px-2 w-1/4">
+                    <div className="text-base text-indigo-500">
+                      {optionVotePercentage(option.id)}%
+                    </div>
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           ))}
-          <div className="flex justify-center px-6">
-            <Button loading={false} buttonText="Submit" />
-          </div>
+          {showResult ? (
+            <div>
+              <p className="text-center text-base text-indigo-500">
+                Thanks for voting!
+              </p>
+              <p className="text-center text-base">🎉</p>
+            </div>
+          ) : (
+            <div className="flex justify-center px-6">
+              <Button
+                loading={false}
+                buttonText="Submit"
+                onClick={handleSubmit}
+              />
+            </div>
+          )}
         </div>
       </div>
     </Container>

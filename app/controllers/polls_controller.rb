@@ -10,7 +10,7 @@ class PollsController < ApplicationController
   def show
     render status: :ok, json: { poll: @poll.as_json(include: {
                                                       options: {
-                                                        only: %i[id value]
+                                                        only: %i[id value vote_count]
                                                       }
                                                     }) }
   end
@@ -52,6 +52,6 @@ class PollsController < ApplicationController
   end
 
   def poll_params
-    params.require(:poll).permit(:title, options_attributes: %i[id value])
+    params.require(:poll).permit(:title, options_attributes: %i[id value vote_count])
   end
 end
