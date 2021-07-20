@@ -8,7 +8,7 @@ const Container = ({ children }) => {
       <NavBar />
       <div className="container mx-auto">
         <div className="flex h-full">
-          <div className="bg-white border shadow-md mx-auto mt-12 md-8 w-3/4 px-2 py-4">
+          <div className="bg-white border shadow-md mx-auto mt-16 md-8 w-3/5 px-2 py-4">
             {children}
           </div>
         </div>
