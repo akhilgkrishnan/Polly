@@ -1,26 +1,5 @@
 # Polly
 
-# README
+[![CircleCI](https://circleci.com/gh/AkhilGKrishnan/Polly/tree/main.svg?style=svg&circle-token=70d7315cbe54c6a2a8ea5e3e72954c426fda95f0)](https://circleci.com/gh/AkhilGKrishnan/Polly/tree/main)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-- Ruby version
-
-- System dependencies
-
-- Configuration
-
-- Database creation
-
-- Database initialization
-
-- How to run the test suite
-
-- Services (job queues, cache servers, search engines, etc.)
-
-- Deployment instructions
-
-- ...
+App URL: https://quiz-polly.herokuapp.com
