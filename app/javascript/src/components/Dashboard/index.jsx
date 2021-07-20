@@ -83,7 +83,23 @@ const Dashboard = ({ history }) => {
 
   return (
     <Container>
-      <h1 className="text-xl leading-5 text-center">No polls found..! 😔</h1>
+      <div className="flex justify-center">
+        <div className="w-3/4 px-4">
+          <div className="flex justify-between">
+            <h2 className="text-3xl font-extrabold text-indigo-500">Polls</h2>
+            <Button
+              type="link"
+              path={`/polls/new`}
+              buttonText="Create a poll +"
+              iconClass="ri-add-line"
+              loading={loading}
+            />
+          </div>
+          <h1 className="text-xl leading-5 text-center">
+            No polls found..! 😔
+          </h1>
+        </div>
+      </div>
     </Container>
   );
 };
