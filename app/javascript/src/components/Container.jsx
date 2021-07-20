@@ -1,10 +1,17 @@
-import React from "react";
+import React, { createContext } from "react";
 import NavBar from "components/NavBar";
 import PropTypes from "prop-types";
+import { getFromLocalStorage } from "src/helpers/storage";
+import { isNil, isEmpty, either } from "ramda";
+
+export const UserLoggedInContext = createContext();
 
 const Container = ({ children }) => {
+  const authToken = getFromLocalStorage("authToken");
+  const isLoggedIn = !either(isNil, isEmpty)(authToken) && authToken != "null";
+
   return (
-    <>
+    <UserLoggedInContext.Provider value={isLoggedIn}>
       <NavBar />
       <div className="container mx-auto">
         <div className="flex h-full">
@@ -13,7 +20,7 @@ const Container = ({ children }) => {
           </div>
         </div>
       </div>
-    </>
+    </UserLoggedInContext.Provider>
   );
 };
 
