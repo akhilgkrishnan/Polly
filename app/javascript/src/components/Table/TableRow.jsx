@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { PollsDataContext } from "components/Dashboard";
-import { UserLoggedInContext } from "components/Container";
+import { UserLoggedInContext } from "src/App";
 import PropTypes from "prop-types";
 import Button from "components/Button";
 

@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import Container from "components/Container";
 import PollForm from "./Form/PollForm";
 import pollsApi from "apis/polls";
-import Toastr from "components/Common/Toastr";
 import PageLoader from "components/PageLoader";
 
 const EditTask = ({ history }) => {

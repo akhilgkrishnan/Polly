@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { getFromLocalStorage, setToLocalStorage } from "src/helpers/storage";
 import authApi from "apis/auth";
 import { resetAuthTokens } from "src/apis/axios";
-import { UserLoggedInContext } from "components/Container";
+import { UserLoggedInContext } from "src/App";
 
 const NavBar = () => {
   const userName = getFromLocalStorage("authUserName");
