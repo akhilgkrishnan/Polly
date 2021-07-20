@@ -32,6 +32,15 @@ const Dashboard = ({ history }) => {
     history.push(`/polls/${id}/edit`);
   };
 
+  const destroyPoll = async id => {
+    try {
+      await pollsApi.destroy(id);
+      await fetchPolls();
+    } catch (error) {
+      logger.error(error);
+    }
+  };
+
   useEffect(() => {
     fetchPolls();
   }, []);
@@ -60,7 +69,11 @@ const Dashboard = ({ history }) => {
               />
             </div>
             <PollsDataContext.Provider value={polls}>
-              <ListPolls showPoll={showPoll} editPoll={editPoll} />
+              <ListPolls
+                showPoll={showPoll}
+                editPoll={editPoll}
+                destroyPoll={destroyPoll}
+              />
             </PollsDataContext.Provider>
           </div>
         </div>

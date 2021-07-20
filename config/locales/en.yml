@@ -2,3 +2,4 @@ en:
   hello: "Hello world"
   successfully_created: "%{type} was succesfully created!"
   successfully_updated: "%{type} updated successfully!"
+  successfully_deleted: "%{type} deleted successfully!"

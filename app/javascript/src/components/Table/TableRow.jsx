@@ -3,7 +3,7 @@ import { PollsDataContext } from "components/Dashboard";
 import PropTypes from "prop-types";
 import Button from "components/Button";
 
-const TableRow = ({ showPoll, editPoll }) => {
+const TableRow = ({ showPoll, editPoll, destroyPoll }) => {
   const data = useContext(PollsDataContext);
   return (
     <div className="table w-full">
@@ -21,7 +21,10 @@ const TableRow = ({ showPoll, editPoll }) => {
                 <Button buttonText="Edit" onClick={() => editPoll(poll.id)} />
               </div>
               <div className="table-cell pl-2">
-                <Button buttonText="Delete" />
+                <Button
+                  buttonText="Delete"
+                  onClick={() => destroyPoll(poll.id)}
+                />
               </div>
             </div>
           </div>

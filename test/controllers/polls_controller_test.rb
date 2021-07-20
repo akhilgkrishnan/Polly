@@ -16,4 +16,11 @@ class PollsControllerTest < ActionDispatch::IntegrationTest
     response_json = response.parsed_body
     assert_equal response_json['errors'], "Title can't be blank"
   end
+
+  test 'delete a poll, should remove the poll from databse' do
+    Poll.create(title: 'Which is the best country')
+    test = Poll.create(title: 'Which is the best state in india?')
+    delete "/polls/#{test.id}"
+    assert_equal Poll.all.count, 1
+  end
 end
