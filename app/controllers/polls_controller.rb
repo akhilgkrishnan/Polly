@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class PollsController < ApplicationController
-  skip_before_action :verify_authenticity_token
-  before_action :load_poll, only: [:show]
+  before_action :load_poll, only: %i[show update]
   def index
     polls = Poll.all
     render status: :ok, json: { polls: polls }
@@ -26,6 +25,15 @@ class PollsController < ApplicationController
     end
   end
 
+  def update
+    if @poll.update(poll_params)
+      render status: :ok, json: { notice: t('successfully_updated', type: 'Poll') }
+    else
+      errors = @poll.errors.full_messages
+      render status: :unprocessable_entity, json: { errors: errors }
+    end
+  end
+
   private
 
   def load_poll
@@ -35,6 +43,6 @@ class PollsController < ApplicationController
   end
 
   def poll_params
-    params.require(:poll).permit(:title, options_attributes: %i[value])
+    params.require(:poll).permit(:title, options_attributes: %i[id value])
   end
 end

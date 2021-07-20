@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import { PollsDataContext } from "components/Dashboard";
 import PropTypes from "prop-types";
+import Button from "components/Button";
 
-const TableRow = ({ showPoll }) => {
+const TableRow = ({ showPoll, editPoll }) => {
   const data = useContext(PollsDataContext);
   return (
     <div className="table w-full">
@@ -14,6 +15,14 @@ const TableRow = ({ showPoll }) => {
               onClick={() => showPoll(poll.id)}
             >
               {poll.title}
+            </div>
+            <div>
+              <div className="table-cell">
+                <Button buttonText="Edit" onClick={() => editPoll(poll.id)} />
+              </div>
+              <div className="table-cell pl-2">
+                <Button buttonText="Delete" />
+              </div>
             </div>
           </div>
         ))}

@@ -1,10 +1,10 @@
 import React from "react";
 import TableRow from "./TableRow";
 
-const Table = ({ showPoll }) => {
+const Table = ({ showPoll, editPoll }) => {
   return (
     <div className="table w-full">
-      <TableRow showPoll={showPoll} />
+      <TableRow showPoll={showPoll} editPoll={editPoll} />
     </div>
   );
 };

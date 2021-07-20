@@ -6,6 +6,7 @@ import Dashboard from "components/Dashboard";
 import CreatePoll from "components/Polls/CreatePoll";
 import { ToastContainer } from "react-toastify";
 import ShowPoll from "components/Polls/ShowPoll";
+import EditPoll from "components/Polls/EditPoll";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -22,6 +23,7 @@ const App = () => {
       <Switch>
         <Route exact path="/polls/new" component={CreatePoll} />
         <Route exact path="/polls/:id/show" component={ShowPoll} />
+        <Route exact path="/polls/:id/edit" component={EditPoll} />
         <Route exact path="/" component={Dashboard} />
       </Switch>
     </Router>
