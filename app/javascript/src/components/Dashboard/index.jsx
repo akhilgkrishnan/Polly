@@ -1,7 +1,7 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
 import { isNil, isEmpty, either } from "ramda";
 
-import Container from "components/Container";
+import Container, { UserLoggedInContext } from "components/Container";
 import ListPolls from "components/Polls/ListPolls";
 import PageLoader from "components/PageLoader";
 import Button from "components/Button";
@@ -12,6 +12,7 @@ export const PollsDataContext = createContext();
 const Dashboard = ({ history }) => {
   const [polls, setPolls] = useState([]);
   const [loading, setLoading] = useState(true);
+  const isLoggedIn = useContext(PollsDataContext);
 
   const fetchPolls = async () => {
     try {
@@ -60,13 +61,17 @@ const Dashboard = ({ history }) => {
           <div className="w-3/4 px-4">
             <div className="flex justify-between">
               <h2 className="text-3xl font-extrabold text-indigo-500">Polls</h2>
-              <Button
-                type="link"
-                path={`/polls/new`}
-                buttonText="Create a poll +"
-                iconClass="ri-add-line"
-                loading={loading}
-              />
+              {isLoggedIn ? (
+                <Button
+                  type="link"
+                  path={`/polls/new`}
+                  buttonText="Create a poll +"
+                  iconClass="ri-add-line"
+                  loading={loading}
+                />
+              ) : (
+                ""
+              )}
             </div>
             <PollsDataContext.Provider value={polls}>
               <ListPolls
@@ -87,13 +92,17 @@ const Dashboard = ({ history }) => {
         <div className="w-3/4 px-4">
           <div className="flex justify-between">
             <h2 className="text-3xl font-extrabold text-indigo-500">Polls</h2>
-            <Button
-              type="link"
-              path={`/polls/new`}
-              buttonText="Create a poll +"
-              iconClass="ri-add-line"
-              loading={loading}
-            />
+            {isLoggedIn ? (
+              <Button
+                type="link"
+                path={`/polls/new`}
+                buttonText="Create a poll +"
+                iconClass="ri-add-line"
+                loading={loading}
+              />
+            ) : (
+              ""
+            )}
           </div>
           <h1 className="text-xl leading-5 text-center">
             No polls found..! 😔
