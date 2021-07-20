@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
-import { PollsDataContext } from "components/Dashboard";
+import { PollsDataContext, UserLoggedInContext } from "components/Dashboard";
 import PropTypes from "prop-types";
 import Button from "components/Button";
 
 const TableRow = ({ showPoll, editPoll, destroyPoll }) => {
   const data = useContext(PollsDataContext);
+  const isLoggedIn = useContext(UserLoggedInContext);
   return (
     <div className="table w-full">
       <div className="table-row-group">
@@ -16,17 +17,21 @@ const TableRow = ({ showPoll, editPoll, destroyPoll }) => {
             >
               {poll.title}
             </div>
-            <div>
-              <div className="table-cell">
-                <Button buttonText="Edit" onClick={() => editPoll(poll.id)} />
+            {isLoggedIn ? (
+              <div>
+                <div className="table-cell">
+                  <Button buttonText="Edit" onClick={() => editPoll(poll.id)} />
+                </div>
+                <div className="table-cell pl-2">
+                  <Button
+                    buttonText="Delete"
+                    onClick={() => destroyPoll(poll.id)}
+                  />
+                </div>
               </div>
-              <div className="table-cell pl-2">
-                <Button
-                  buttonText="Delete"
-                  onClick={() => destroyPoll(poll.id)}
-                />
-              </div>
-            </div>
+            ) : (
+              ""
+            )}
           </div>
         ))}
       </div>

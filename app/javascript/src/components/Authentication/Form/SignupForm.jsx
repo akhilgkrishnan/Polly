@@ -54,7 +54,7 @@ const SignupForm = ({
       </form>
       <div className="flex justify-center items-center mt-2">
         <p className="text-xs">Already have an account? </p>
-        <Link to="/" className="text-xs font-bold underline pl-1">
+        <Link to="/login" className="text-xs font-bold underline pl-1">
           Login
         </Link>
       </div>

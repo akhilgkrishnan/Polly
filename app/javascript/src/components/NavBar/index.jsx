@@ -1,7 +1,10 @@
 import React from "react";
-// import NavItem from "./NavItem";
+import { Link } from "react-router-dom";
+import { getFromLocalStorage } from "src/helpers/storage";
 
 const NavBar = () => {
+  const userName = getFromLocalStorage("authUserName");
+
   return (
     <nav className="bg-white px-2 py-2">
       <div className="container mx-auto">
@@ -14,13 +17,22 @@ const NavBar = () => {
             </h1>
           </div>
           <div>
-            <a
+            <Link
+              className="inline-flex items-center px-1 pt-1 mr-3 font-semibold text-lg leading-5"
+              to="/"
+            >
+              {userName}
+            </Link>
+            <a className="inline-flex items-center px-1 pt-1 mr-3 font-semibold text-lg leading-5 cursor-pointer">
+              Logout
+            </a>
+            <Link
               className="inline-flex items-center px-1 pt-1
                       mr-3 font-semibold text-lg leading-5"
-              href="/login"
+              to="/login"
             >
               Login
-            </a>
+            </Link>
           </div>
         </div>
       </div>

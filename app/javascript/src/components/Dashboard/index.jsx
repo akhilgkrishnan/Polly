@@ -6,12 +6,16 @@ import ListPolls from "components/Polls/ListPolls";
 import PageLoader from "components/PageLoader";
 import Button from "components/Button";
 import pollsApi from "apis/polls";
+import { getFromLocalStorage } from "src/helpers/storage";
 
 export const PollsDataContext = createContext();
+export const UserLoggedInContext = createContext();
 
 const Dashboard = ({ history }) => {
   const [polls, setPolls] = useState([]);
   const [loading, setLoading] = useState(true);
+  const authToken = getFromLocalStorage("authToken");
+  const isLoggedIn = !either(isNil, isEmpty)(authToken) && authToken != "null";
 
   const fetchPolls = async () => {
     try {
@@ -69,11 +73,13 @@ const Dashboard = ({ history }) => {
               />
             </div>
             <PollsDataContext.Provider value={polls}>
-              <ListPolls
-                showPoll={showPoll}
-                editPoll={editPoll}
-                destroyPoll={destroyPoll}
-              />
+              <UserLoggedInContext.Provider value={isLoggedIn}>
+                <ListPolls
+                  showPoll={showPoll}
+                  editPoll={editPoll}
+                  destroyPoll={destroyPoll}
+                />
+              </UserLoggedInContext.Provider>
             </PollsDataContext.Provider>
           </div>
         </div>

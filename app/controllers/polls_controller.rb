@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class PollsController < ApplicationController
+  before_action :authenticate_user_using_x_auth_token, except: :index
   before_action :load_poll, only: %i[show update destroy]
   def index
     polls = Poll.all
@@ -39,7 +40,7 @@ class PollsController < ApplicationController
       render status: :ok, json: { notice: t('successfully_deleted', type: 'Poll') }
     else
       render status: :unprocessable_entity, json: { errors:
-      @task.errors.full_messages.to_sentence }
+      @polls.errors.full_messages.to_sentence }
     end
   end
 
@@ -53,5 +54,6 @@ class PollsController < ApplicationController
 
   def poll_params
     params.require(:poll).permit(:title, options_attributes: %i[id value vote_count])
+          .merge(user_id: @current_user.id)
   end
 end
