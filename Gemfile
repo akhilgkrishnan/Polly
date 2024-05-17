@@ -22,7 +22,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # Use ReactJS library in rails app
 gem 'react-rails'
 
-gem 'rexml', '~> 3.2', '>= 3.2.4'
+gem 'rexml', '~> 3.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
